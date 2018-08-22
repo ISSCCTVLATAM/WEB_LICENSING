@@ -30,7 +30,9 @@ if (version_compare(PHP_VERSION, '5.3.7', '<')) {
             $errors[] = "El correo electrónico no puede ser superior a 64 caracteres";
         } elseif (!filter_var($_POST['user_email'], FILTER_VALIDATE_EMAIL)) {
             $errors[] = "Su dirección de correo electrónico no está en un formato de correo electrónico válida";
-        } elseif (
+        } elseif (empty($_POST['phone'])){
+			$errors[] = "Teléfono vacío";
+		} elseif (
 			!empty($_POST['user_name'])
 			&& !empty($_POST['firstname'])
             && !empty($_POST['is_admin'])
@@ -54,6 +56,7 @@ if (version_compare(PHP_VERSION, '5.3.7', '<')) {
                 $is_admin = mysqli_real_escape_string($con,(strip_tags($_POST["is_admin"],ENT_QUOTES)));
 				$user_password = $_POST['user_password_new'];
 				$date_added=date("Y-m-d H:i:s");
+                $phone = mysqli_real_escape_string($con,(strip_tags($_POST['phone'],ENT_QUOTES)));
                 // crypt the user's password with PHP 5.5's password_hash() function, results in a 60 character
                 // hash string. the PASSWORD_DEFAULT constant is defined by the PHP 5.5, or if you are using
                 // PHP 5.3/5.4, by the password hashing compatibility library
@@ -68,12 +71,12 @@ if (version_compare(PHP_VERSION, '5.3.7', '<')) {
                     $errors[] = "Lo sentimos , el nombre de usuario ó la dirección de correo electrónico ya está en uso.";
                 } else {
 					// write new user's data into database
-                    $sql = "INSERT INTO user (user_id, user_name, full_name, user_email, user_password_hash, admin, date_added)
-                            VALUES(default, '".$user_name."','" . $firstname . "', '" . $user_email . "', '" . $user_password_hash . "', '".$is_admin."', '".$date_added."');";
+                    $sql = "INSERT INTO user (user_id, user_name, full_name, user_email, user_password_hash, user_type, date_added,phone,enterprise_id)
+                            VALUES(default, '".$user_name."','" . $firstname . "', '" . $user_email . "', '" . $user_password_hash . "', '".$is_admin."', '".$date_added."','". $phone ."','1');";
                     echo '<script>alert("'.$sql.'")</script>';
                     $query_new_user_insert = mysqli_query($con,$sql);
 
-                    // if user has been added successfully
+                    // if user has  been added successfully
                     if ($query_new_user_insert) {
                         $messages[] = "La cuenta ha sido creada con éxito.";
                     } else {
@@ -88,28 +91,30 @@ if (version_compare(PHP_VERSION, '5.3.7', '<')) {
 		if (isset($errors)){
 			
 			?>
-			<div class="alert alert-danger" role="alert">
-				<button type="button" class="close" data-dismiss="alert">&times;</button>
+			<div class="alert alert-danger red-text flow-text" role="alert">
+				
 					<strong>Error!</strong> 
 					<?php
 						foreach ($errors as $error) {
 								echo $error;
 							}
 						?>
+                        <i class="material-icons">error</i>
 			</div>
 			<?php
 			}
 			if (isset($messages)){
 				
 				?>
-				<div class="alert alert-success" role="alert">
-						<button type="button" class="close" data-dismiss="alert">&times;</button>
+				<div class="alert alert-success green-text flow-text" role="alert">
+						
 						<strong>¡Bien hecho!</strong>
 						<?php
 							foreach ($messages as $message) {
 									echo $message;
 								}
 							?>
+                            <i class="material-icons">done</i>
 				</div>
 				<?php
 			}

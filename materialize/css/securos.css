@@ -1,0 +1,16 @@
+.securos-colorb{
+	background-color: #00327d;
+}
+.securo-color{
+	color: #00327d;
+}
+.color-video{
+	background-color: #c6d9f1;
+}
+.color-video-title{
+	background-color: #8db4e2;
+}
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}

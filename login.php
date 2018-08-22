@@ -30,14 +30,22 @@ if ($login->isUserLoggedIn() == true) {
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
   <title>Control Licenciamiento | ISS MX</title>
 	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">	
   <!-- CSS  -->
    <link href="css/login.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+   <link rel="stylesheet" type="text/css" href="materialize/css/login.css" media="screen,projection"/>
 </head>
-<body>
+<body class="loading">
+	<div id="wrapper">
+			<div id="bg"></div>
+			<div id="overlay"></div>
+			<div id="main">
+
+				<!-- Header -->
+					<header id="header">
  <div class="container">
         <div class="card card-container">
-            <img id="profile-img" class="profile-img-card" src="img/avatar_2x.png" />
+            <img id="profile-img" src="img/site-main-logo.png" />
             <p id="profile-name" class="profile-name-card"></p>
             <form method="post" accept-charset="utf-8" action="login.php" name="loginform" autocomplete="off" role="form" class="form-signin">
 			<?php
@@ -78,6 +86,17 @@ if ($login->isUserLoggedIn() == true) {
             
         </div><!-- /card-container -->
     </div><!-- /container -->
+    </header>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<span class="copyright">&copy; 2018 Intelligent Security Systems. Todos los derechos reservados.</span>
+					</footer>
+    <script>
+			window.onload = function() { document.body.className = ''; }
+			window.ontouchmove = function() { return false; }
+			window.onorientationchange = function() { document.body.scrollTop = 0; }
+		</script>
   </body>
 </html>
 
