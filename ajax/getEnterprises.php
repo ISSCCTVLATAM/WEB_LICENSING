@@ -2,8 +2,7 @@
    require_once ("../config/db.php");//Contiene las variables de configuracion para conectar a la base de datos
    require_once ("../config/conexion.php");//Contiene funcion que conecta a la base de datos
 
-    $q=$_GET["term"];
-    $sql="SELECT enterprise_name FROM licensing.enterprise WHERE enterprise_name LIKE '%$q%'";
+    $sql="SELECT enterprise_name FROM licensing.enterprise";
 
     $result = mysqli_query($con,$sql);
     $json=array();

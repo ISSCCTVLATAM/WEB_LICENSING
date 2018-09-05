@@ -219,8 +219,9 @@
         
         for(var i=0;i<jsonin.length;i++)
         {
+            console.log(i);
             var modalid = i+1;
-            document.getElementById("datain").innerHTML += "<tr><td>" + jsonvar[0]["project_name"] + "</td><td>" + JSON.parse(jsonin[0]["license_details"])["servers"][0]["hru"] + "</td><td>" + jsonvar[0]["full_name"] + "</td><td>" + jsonvar[0]["enterprise_name"] + "</td><td>" + jsonvar[0]["comment"] + "</td><td><a href=\"#modal" + modalid + "\" class=\"btn waves-effect waves-ligh modal-trigger\">+INFO</a></td></tr>";
+            document.getElementById("datain").innerHTML += "<tr><td>" + jsonvar[i]["project_name"] + "</td><td>" + JSON.parse(jsonin[i]["license_details"])["servers"][0]["hru"] + "</td><td>" + jsonvar[i]["name"] + "</td><td>" + jsonvar[i]["integrator_id"] + "</td><td>" + jsonvar[i]["comment"] + "</td><td><a href=\"#modal" + modalid + "\" class=\"btn waves-effect waves-ligh modal-trigger\">+INFO</a></td></tr>";
         }
         
     }
