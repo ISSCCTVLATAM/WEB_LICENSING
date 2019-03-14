@@ -9,29 +9,29 @@ if (version_compare(PHP_VERSION, '5.3.7', '<')) {
     require_once("../libraries/password_compatibility_library.php");
 }		
 		if (empty($_POST['firstname'])){
-			$errors[] = "Nombre completo vacío";
+			$errors[] = "Empty full name";
 		} elseif (empty($_POST['user_name'])) {
-            $errors[] = "Nombre de usuario vacío";
+            $errors[] = "Empty username";
         } elseif (empty($_POST['is_admin'])) {
-            $errors[] = "Valor administrador vacío";
+            $errors[] = "Empty admin value";
         } elseif (empty($_POST['user_password_new']) || empty($_POST['user_password_repeat'])) {
-            $errors[] = "Contraseña vacía";
+            $errors[] = "Empty password";
         } elseif ($_POST['user_password_new'] !== $_POST['user_password_repeat']) {
-            $errors[] = "la contraseña y la repetición de la contraseña no son lo mismo";
+            $errors[] = "Password and confirmation do not match";
         } elseif (strlen($_POST['user_password_new']) < 6) {
-            $errors[] = "La contraseña debe tener como mínimo 6 caracteres";
+            $errors[] = "Password should have at least 6 characters";
         } elseif (strlen($_POST['user_name']) > 64 || strlen($_POST['user_name']) < 2) {
-            $errors[] = "Nombre de usuario no puede ser inferior a 2 o más de 64 caracteres";
+            $errors[] = "Username cannot have less than 2 or more than 64 characters";
         } elseif (!preg_match('/^[a-z\d]{2,64}$/i', $_POST['user_name'])) {
-            $errors[] = "Nombre de usuario no encaja en el esquema de nombre: Sólo aZ y los números están permitidos , de 2 a 64 caracteres";
+            $errors[] = "Username do not match username politics: Just aZ and numbers permitted, 2 to 64 characters";
         } elseif (empty($_POST['user_email'])) {
-            $errors[] = "El correo electrónico no puede estar vacío";
+            $errors[] = "Empty mail";
         } elseif (strlen($_POST['user_email']) > 64) {
-            $errors[] = "El correo electrónico no puede ser superior a 64 caracteres";
+            $errors[] = "Mail cannot have more than 64 characters";
         } elseif (!filter_var($_POST['user_email'], FILTER_VALIDATE_EMAIL)) {
-            $errors[] = "Su dirección de correo electrónico no está en un formato de correo electrónico válida";
+            $errors[] = "Invalid mail format";
         } elseif (empty($_POST['phone'])){
-			$errors[] = "Teléfono vacío";
+			$errors[] = "Empty phone number";
 		} elseif (
 			!empty($_POST['user_name'])
 			&& !empty($_POST['firstname'])
@@ -46,8 +46,8 @@ if (version_compare(PHP_VERSION, '5.3.7', '<')) {
             && !empty($_POST['user_password_repeat'])
             && ($_POST['user_password_new'] === $_POST['user_password_repeat'])
         ) {
-            require_once ("../config/db.php");//Contiene las variables de configuracion para conectar a la base de datos
-			require_once ("../config/conexion.php");//Contiene funcion que conecta a la base de datos
+            require_once ("../config/db.php");
+			require_once ("../config/conexion.php");
 			
 				// escaping, additionally removing everything that could be (html/javascript-) code
                 $firstname = mysqli_real_escape_string($con,(strip_tags($_POST["firstname"],ENT_QUOTES)));
@@ -68,7 +68,7 @@ if (version_compare(PHP_VERSION, '5.3.7', '<')) {
                 $query_check_user_name = mysqli_query($con,$sql);
 				$query_check_user=mysqli_num_rows($query_check_user_name);
                 if ($query_check_user == 1) {
-                    $errors[] = "Lo sentimos , el nombre de usuario ó la dirección de correo electrónico ya está en uso.";
+                    $errors[] = "Sorry, that username or email has already been taken.";
                 } else {
 					// write new user's data into database
                     $sql = "INSERT INTO user (user_id, user_name, full_name, user_email, user_password_hash, user_type, date_added,phone,enterprise_id)
@@ -78,14 +78,14 @@ if (version_compare(PHP_VERSION, '5.3.7', '<')) {
 
                     // if user has  been added successfully
                     if ($query_new_user_insert) {
-                        $messages[] = "La cuenta ha sido creada con éxito.";
+                        $messages[] = "Your account has been created.";
                     } else {
-                        $errors[] = "Lo sentimos , el registro falló. Por favor, regrese y vuelva a intentarlo.";
+                        $errors[] = "Sorry, registration has failed. Please try again.";
                     }
                 }
             
         } else {
-            $errors[] = "Un error desconocido ocurrió.";
+            $errors[] = "Unknown error";
         }
 		
 		if (isset($errors)){
@@ -108,7 +108,7 @@ if (version_compare(PHP_VERSION, '5.3.7', '<')) {
 				?>
 				<div class="alert alert-success green-text flow-text" role="alert">
 						
-						<strong>¡Bien hecho!</strong>
+						<strong>Done!</strong>
 						<?php
 							foreach ($messages as $message) {
 									echo $message;

@@ -1,7 +1,6 @@
 <?php
 
-    // Para saber si sí hizo login o no. Esto se necesita poner en todas las
-    // subpáginas para que no entre si no ha hecho login
+    // Check login. Please use this in all pages created
 
     session_start();
   if (!isset($_SESSION['user_login_status']) AND $_SESSION['user_login_status'] != 1) {
@@ -14,7 +13,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>HOME | ISS</title>
+	<title>HOME | ISSIVS</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css"  media="screen,projection"/>
@@ -26,11 +25,11 @@
 	<nav class="securos-colorb">
     <div class="nav-wrapper">
       <img src="img/iss_logo_en_horizontal_blue.png" class="brand-logo responsive-img" style="border-radius: 10px;" height="150px" width="200px" />
-      <span href="#!" class="brand-logo center iss hide-on-small-only">Panel de Control de Licencias</span>
+      <span href="#!" class="brand-logo center iss hide-on-small-only">Licensing Control Panel</span>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a href="#modal0" class="modal-trigger"><i class="material-icons right">search</i>Buscar HRU</a></li>
-        <li><a href="user_creator.php" class="modal-trigger"><i class="material-icons right">person_add</i>Crear cuenta</a></li>
-        <li><a href="login.php?logout"><i class="material-icons right">close</i>Salir</a></li>
+        <li><a href="#modal0" class="modal-trigger"><i class="material-icons right">search</i>Search HRU</a></li>
+        <li><a href="user_creator.php" class="modal-trigger"><i class="material-icons right">person_add</i>Create Account</a></li>
+        <li><a href="login.php?logout"><i class="material-icons right">close</i>Log out</a></li>
       </ul>
     </div>
     
@@ -38,8 +37,8 @@
   <!-- Modal Structure -->
   <div id="modal0" class="modal">
     <div class="modal-content">
-      <h4>Buscar Licencia por HRU</h4>
-      <p>Por favor ingresa el HRU a buscar en la plataforma.
+      <h4>Search license by HRU</h4>
+      <p>Please write HRU to search in databases.
     <br><br>
     <div class="row">
       <div class="input-field col s12 m12 l12">
@@ -50,8 +49,8 @@
       </p>
     </div>
     <div class="modal-footer">
-      <a href="#!" class="modal-close waves-effect waves-green btn-flat red white-text">cancelar</a>
-      <a href="#!" class="modal-close waves-effect waves-green btn-flat securos-colorb white-text">Buscar</a>
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat red white-text">cancel</a>
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat securos-colorb white-text">Search</a>
     </div>
   </div>
   <!--SIDENAV-->
@@ -64,19 +63,19 @@
         </div>
       </li>
        <div class="divider"></div>
-       <li><a class="flow-text white-text"><i class="material-icons white-text">arrow_drop_down</i>Menú de opciones</a></li>
-      <li><a href="key-register-form.php" class="white-text"><i class="white-text material-icons">create</i>Registrar Licencia</a></li>
-        <li><a href="#!" class="white-text"><span class="new badge red">4</span><i class="white-text material-icons">delete_forever</i>Keys por vencer</a></li>
-        <li><a href="mailto:?Subject=Formulario%20de%20Solicitud%20de%20Licencia&amp;body=Que%20tal,%0D%0A%0D%0AIngresa%20a%20la%20siguiente%20liga%20para%20solictar%20una%20licencia.%20Lee%20cuidadosamente%20y%20llena%20todos%20los%20campos%20que%20se%20te%20solicitan:%0D%0A%0D%0ALINK:%20http://localhost:8081/weblic/key-request-form.php" target="_top" class="white-text"><i class="white-text material-icons">contact_mail</i>Enviar solicitud de licencia</a></li>
-         <li><a href="#!" class="white-text"><i class="white-text material-icons">group</i>Lista de Cientes</a></li>
+       <li><a class="flow-text white-text"><i class="material-icons white-text">arrow_drop_down</i>Options Menu</a></li>
+      <li><a href="key-register-form.php" class="white-text"><i class="white-text material-icons">create</i>Register License</a></li>
+        <li><a href="#!" class="white-text"><span class="new badge red">4</span><i class="white-text material-icons">delete_forever</i>Licenses about to expire</a></li>
+        <li><a href="mailto:?Subject=License%20Request%20Form&amp;body=Hello,%0D%0A%0D%0AClick%20the%20link%20to%20make%20a%20license%20request.%20Please%20read%20carefully%20and%20fill%20all%20required%20data:%0D%0A%0D%0ALINK:%20http://issivs.com/weblic/key-request-form.php" target="_top" class="white-text"><i class="white-text material-icons">contact_mail</i>Send license request</a></li>
+         <li><a href="#!" class="white-text"><i class="white-text material-icons">group</i>Client list</a></li>
          <li>
            <ul class="collapsible">
           <li>
-            <div class="collapsible-header white-text">&nbsp;&nbsp;&nbsp;<i class="material-icons white-text">search</i>&nbsp;&nbsp;&nbsp;Buscar</div>
+            <div class="collapsible-header white-text">&nbsp;&nbsp;&nbsp;<i class="material-icons white-text">search</i>&nbsp;&nbsp;&nbsp;Search</div>
             <div class="collapsible-body">
               <ul class="collection">
-                <a href="#!" class="collection-item">Buscar por HRU</a>
-                <a href="#!" class="collection-item">Buscar por Cliente</a>
+                <a href="#!" class="collection-item">Search by HRU</a>
+                <a href="#!" class="collection-item">Search by Client</a>
             </ul>
             </div>
           </li>
@@ -95,19 +94,19 @@
     <div class="col s12 m12 l12">
        <div class="section white">
       <div class="row container">
-        <h2 class="header">Ultimas Licencias agregadas</h2>
-        <p class="grey-text text-darken-3 lighten-3">Visualizacion de las ultimas licencias registradas en la plaforma.</p>
+        <h2 class="header">Last added licenses</h2>
+        <p class="grey-text text-darken-3 lighten-3">View of the last added licenses into the system.</p>
       </div>
     </div>
       <table class="striped responsive-table centered">
         <thead>
           <tr>
-              <th>Proyecto</th>
-              <th>HRU Principal</th>
-              <th>Usuario que Solicita</th>
-              <th>Empresa</th>
-              <th>Comentarios</th>
-              <th>Información Adicional</th>
+              <th>Project</th>
+              <th>Main HRU</th>
+              <th>User who requests</th>
+              <th>Enterprise</th>
+              <th>Comments</th>
+              <th>Additional info</th>
           </tr>
         </thead>
 
@@ -122,46 +121,46 @@
   <!-- Modal Structure -->
   <div id="modal1" class="modal ">
     <div class="modal-content">
-      <h4>Detalles de licencia</h4>
-      <p>A continuación se muestra a detalle toda la información relacionada a la Licencia.
+      <h4>License details</h4>
+      <p>Detailed info related to license.
         <div class="divider"></div>
     <br>
     <div class="row">
       <div class="col s12 m4 l4">
-          <label >Cliente: </label><h5>MAGNA</h5>
+          <label >Client: </label><h5>MAGNA</h5>
       </div>
       <div class="col s12 m4 l4">
-          <label >Proyecto: </label><h5>MAGNA Mecanismos Face</h5>
+          <label >Project: </label><h5>MAGNA Mecanismos Face</h5>
       </div>
       <div class="col s12 m4 l4"><label >Email: </label><h5>soporte@magna.com</h5></div>
     </div>
     <div class="row">
       <div class="col s12 m8 l8">
-        <label >HRU de configuración: </label><h5>C15C34D9E219A19C65825F29C4D00B7F</h5>
+        <label >Configuration HRU: </label><h5>C15C34D9E219A19C65825F29C4D00B7F</h5>
       </div>
-      <div class="col s12 m4 l4"><label >Numero de cambio: </label><h5>1</h5></div>
+      <div class="col s12 m4 l4"><label >Number of change: </label><h5>1</h5></div>
     </div>
     <div class="row">
-      <div class="col s12 m3 l3"><label >Fecha de creación: </label><h5>12-07-2018</h5></div>
-      <div class="col s12 m3 l3"><label >Fecha de Inicio: </label><h5>12-07-2018</h5></div>
-      <div class="col s12 m3 l3"><label >Fecha de termino: </label><h5>12-10-2018</h5></div>
-      <div class="col s12 m3 l3"><label >Días restantes: </label><h5>180 días</h5></div>
+      <div class="col s12 m3 l3"><label >Creation date: </label><h5>12-07-2018</h5></div>
+      <div class="col s12 m3 l3"><label >Start date: </label><h5>12-07-2018</h5></div>
+      <div class="col s12 m3 l3"><label >End date: </label><h5>12-10-2018</h5></div>
+      <div class="col s12 m3 l3"><label >Days left: </label><h5>180 days</h5></div>
     </div>
     <div class="row">
-      <div class="col s12 m3 l3"><label >Tipo de Producto: </label><h5>Enterprise</h5></div>
-      <div class="col s12 m3 l3"><label >Versión de SecurOS: </label><h5>9.6</h5></div>
-      <div class="col s12 m3 l3"><label >Idioma: </label><h5>Español</h5></div>
-      <div class="col s12 m3 l3"><label >Pais: </label><h5>México</h5></div>
+      <div class="col s12 m3 l3"><label >Product types: </label><h5>Enterprise</h5></div>
+      <div class="col s12 m3 l3"><label >SecurOS version: </label><h5>10.2</h5></div>
+      <div class="col s12 m3 l3"><label >Language: </label><h5>English</h5></div>
+      <div class="col s12 m3 l3"><label >Country: </label><h5>Mexico</h5></div>
     </div>
     <div class="row">
       <div class="col s12 m3 l3"><label >Serial/ID: </label><h5>9089956</h5></div>
-      <div class="col s12 m6 l6"><label >Comentario: </label><h5>La pidio en modo urgente</h5></div>
-      <div class="col s12 m3 l3"><label >Creador: </label><h5>Gerardo Maya</h5></div>
+      <div class="col s12 m6 l6"><label >Comments: </label><h5>Urgent request</h5></div>
+      <div class="col s12 m3 l3"><label >User who requests: </label><h5>Aglahir Jimenez</h5></div>
     </div>
       </p>
       <div class="divider"></div>
       <div class="modal-footer">
-      <a href="#!" class="modal-close waves-effect waves-green btn-flat securos-colorb white-text">Listo</a>
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat securos-colorb white-text">Ready</a>
     </div>
     </div>
   </div>
@@ -173,8 +172,8 @@
 	<footer class="page-footer securos-colorb">
 	        <div class="footer-copyright">
 	           <div class="container">
-	            © 2018 Intelligent Security Systems
-	            <a class="grey-text text-lighten-4 right" href="http://isscctv.com/">Sitio ISS</a>
+	            © 2019 Intelligent Security Systems
+	            <a class="grey-text text-lighten-4 right" href="http://isscctv.com/">ISSIVS Site</a>
 	            </div>
 	        </div>
 	</footer>

@@ -10,8 +10,31 @@
     <link rel="stylesheet" type="text/css" href="jqueryui/jquery-ui.theme.css">
     <script src="jqueryui/jquery.js"></script>
     <script src="jqueryui/jquery-ui.js"></script>
-        
-    
+    <script>    	
+    	var enterprises;
+    	var result = [];
+        $( function() {
+            $.ajax({
+              type: "POST",
+                url: "ajax/getEnterprises.php",
+                data: "",
+                 beforeSend: function(objeto){
+                  },
+                success: function(datos){                    
+                    enterprises = eval(datos);
+                    for(var i in enterprises){
+    					result.push(enterprises[i]);
+                    }                   
+                }
+           }); 
+            $( "#mayorista" ).autocomplete({
+				      source: result
+			});
+			$( "#empresa" ).autocomplete({
+				      source: result
+			});
+        });
+  </script>   
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 <body>
@@ -19,7 +42,7 @@
 	<nav class="securos-colorb z-depth-3">
 	    <div class="nav-wrapper">
 	      <img src="img/iss_logo_en_horizontal_blue.png" style="border-radius: 10px;" class="brand-logo responsive-img" height="100px" width="200px" />
-	      <span href="#!" class="hide-on-small-only brand-logo center iss">Formulario de Solicitud de Licencia</span>	      
+	      <span href="#!" class="hide-on-small-only brand-logo center iss">License Request Form</span>	      
 	    </div>
 	</nav><br>
 	<div class="row">
@@ -27,9 +50,9 @@
 		<div class="col s12 m8 l8">
 			<div class="section white">
 		      <div class="row">
-		        <h2 class="header">Sección 1</h2>
+		        <h2 class="header">Section 1</h2>
 		        <div class="divider"></div>
-		        <p class="grey-text text-darken-3 lighten-3">Por favor, completa el formulario en su totalidad para evitar retrasos en la entrega de licencias.</p>
+		        <p class="grey-text text-darken-3 lighten-3">Please, fill full form to prevent delays.</p>
 		      </div>
 		    </div>		    
 			<form method="POST" autocomplete="on">
@@ -37,49 +60,49 @@
 					<div class="row">
 						<div class="input-field col s12 m6 l6">
 				          <input id="nombre" name="nombre" type="text" class="validate">
-				          <label for="nombre">Nombre del solicitante</label>
+				          <label for="nombre">Requester name</label>
 				        </div>
 				        <div class="input-field col s12 m6 l6">
 				          <input id="email" name="email" type="email" class="validate">
-				          <label for="email">Correo electronico</label>
+				          <label for="email">Mail</label>
 				        </div>
 					</div>
 					<div class="row">
 				        <div class="input-field col s12 m6 l6 ui-widget">
 				          <input id="empresa" name="empresa" type="text" class="validate">
-				          <label for="empresa">Empresa</label>
+				          <label for="empresa">Enterprise</label>
 				        </div>
 				        <div class="input-field col s12 m6 l6 ui-widget">
 				          <input id="mayorista" name="mayorista" type="text" class="validate">
-				          <label for="mayorista">Mayorista</label>
+				          <label for="mayorista">Wholesaler</label>
 				        </div>
-					</div>
+				    </div>
 					<div class="row">
                         <div class="input-field col s12 m6 l6 ui-widget">
 				          <input id="userFinal" name="user_final" type="text" class="validate">
-				          <label for="userFinal">Usuario final</label>
+				          <label for="userFinal">End user</label>
 				        </div>
 				        <div class="input-field col s12 m6 l6 ui-widget">
 				          <input id="project_name" name="project_name" type="text" class="validate">
-				          <label for="project_name">Nombre del proyecto</label>
+				          <label for="project_name">Project name</label>
 				        </div>
 				    </div>
 				    <div class="row">
 				        <div class="col s12 m6 l6">
-				        	<label>TIPO DE SOLICITUD</label>
+				        	<label>Request type</label>
 							  <select class="browser-default" name="tipo_solicitud" id="select_type_request">
-							    <option value="" disabled selected>Seleccione la opcion que solicita</option>
-							    <option value="1">NUEVA LICENCIA</option>
+							    <option value="" disabled selected>Select desired option</option>
+							    <option value="1">NEW LICENSE</option>
 							    <option value="2">UPGRADE</option>
-							    <option value="3">RENOVACIÓN</option>
-							    <option value="4">CAMBIO DE CONFIGURACIÓN</option>
+							    <option value="3">RENOVATION</option>
+							    <option value="4">CHANGE CONFIGURATION</option>
 							  </select>
 				        </div>
 				         <div class="col s12 m6 l6">
-				        	<label>TIPO LICENCIA</label>
+				        	<label>LICENSE TYPE</label>
 							  <select class="browser-default" name="tipo_licencia" id="select_type_license">
-							    <option value="" disabled selected>Seleccione el tipo de licencia</option>
-							    <option value="1">PERMANENTE</option>
+							    <option value="" disabled selected>Select license type</option>
+							    <option value="1">PERMANENT</option>
 							    <option value="2">DEMO KIT</option>
 							    <option value="3">TEMPORAL</option>
 							  </select>
@@ -88,16 +111,21 @@
 				</div>
 				<div class="section white">
 			      <div class="row">
-			        <h2 class="header">NOTAS</h2>
+			        <h2 class="header">NOTES</h2>
 			        <div class="divider"></div>
 			        <p class="grey-text text-darken-3 lighten-3">
 			        	<ol>
-			        		<li>Este formulario es válido para todas las solicitudes de claves de licencia (ISS key.iss, face.key.iss e iv_license).</li>
-			        		<li>TODAS las solicitudes claves permanentes deben ser enviadas con la FACTURA (S) ISS asociadas. Si el formulario de solicitud no coincide con la(s) factura (s), habrá un retraso en la entrega de licencias</li>
-			        		<li>Todas las solicitudes clave DEMO KIT deberá enviarse con una(s) FACTURA(S) ISS asociada.</li>
-			        		<li>Todos los kits DEMO comprados cuentan con 180 días de licencia libremente renovable estándar.</li>
-			        		<li>Todas las solicitudes de actualización, renovación o cambio de configuración deben incluir el archivo de claves existente(s).</li>
-							<li>La entrega de la clave de licencia se dara en las proximas 24 a 48 horas posteriores a la solicitud de esta.</li>
+                            <li>This form is valid for all license keys (ISS key.iss, face.key.iss and iv_license).
+                            </li>
+                            <li>ALL permanent key requests should be send within ISS RECEIPT (S). If this form does not match the corresponding RECEIPT, there will be a delay delivering the key
+                            </li>
+                            <li>All DEMO KIT requests should be sent within corresponding ISS RECEIPT (S).
+                            </li>
+                            <li>All DEMO KIT bought, own 180 days of open license rennovation.</li>
+                            <li>All upgrde, renovation, or change configuration requests should include actual license Key.
+                            </li>
+                            <li>Key will be delivered in the next 24 to 48 hours after sending this request form.
+                            </li>
 			        	</ol>
 			        </p>
 			      </div>
@@ -105,11 +133,11 @@
 			    <div class="divider"></div>
 				<div class="section white">
 			      <div class="row">
-			        <h2 class="header">Seccion 2</h2>
+			        <h2 class="header">Section 2</h2>
 			        <div class="divider"></div>
-			        <p class="grey-text text-darken-3 lighten-3">Sólo se requiere para solicitar tipos de NUEVA LICENCIA. Por favor, especifique los siguientes parámetros licencia GLOBAL.<br><br>
-			        <span style="font-size: 20px;" for="addServer">Agrega una fila (SOLO SI SE NECESITA MAS DE UN TIPO DE SOFTWARE):&nbsp;&nbsp;</span>  
-			        <button class="btn waves-effect waves-light securos-colorb" type="button" id="addProduct" name="addProduct">Agregar Producto
+			        <p class="grey-text text-darken-3 lighten-3">Only NEW LICENSE requirethis field. Please, specify following global license parameters.<br><br>
+			        <span style="font-size: 20px;" for="addServer">Add row (ONLY IF YOU NEED MORE THAN ONE TYOE OF SOFTWARE):&nbsp;&nbsp;</span>  
+			        <button class="btn waves-effect waves-light securos-colorb" type="button" id="addProduct" name="addProduct">Add product
 					    <i class="material-icons right">plus_one</i>
 					  </button>
 			      </div>
@@ -123,17 +151,17 @@
 			<table class="striped">
 		        <thead>
 		          <tr style="font-size: 12px;" class="color-video">
-		          	  <th>ID de Producto</th>
-		              <th>Tipo de Software (XPRESS / PROFESSIONAL / PREMIUM / ENTERPRISE / MCC)</th>
-		              <th>Versión Software </th>
-		              <th>Codigo del País S.O.</th>
-		              <th>Idioma de la instalacion del software</th>
-		              <th># total de cámaras</th>
-		              <th># total de canales de Audio</th>
-		              <th># de Servidores de Video</th>
-		              <th># de operadores Workstation</th>
-		              <th># Factura ISS asociadas</th>
-		              <th>Comentarios adicionales</th>
+		          	  <th>Product ID</th>
+		              <th>Software type (XPRESS / PROFESSIONAL / PREMIUM / ENTERPRISE / MCC)</th>
+		              <th>Software version </th>
+		              <th>Country code S.O.</th>
+		              <th>Software language</th>
+		              <th># quantity of cameras</th>
+		              <th># quantity of audio channels</th>
+		              <th># quantity of Video Servers</th>
+		              <th># quantity of operator Workstations</th>
+		              <th># ISS RECEIPT number</th>
+		              <th>Additional comments</th>
 		          </tr>
 		        </thead>
 
@@ -147,11 +175,11 @@
 			<div class="divider"></div>
 						<div class="section white">
 					      <div class="row">
-					        <h2 class="header">Seccion 3</h2>
+					        <h2 class="header">Section 3</h2>
 					        <div class="divider"></div>
-					        <p class="grey-text text-darken-3 lighten-3">Si desea agregar mas de un modulo a un producto de SecurOS, hágalo mediante el <b>ID DE PRODUCTO</b> el cual será asociado junto con el número de canales que necesite.<br><br>
-					        <span style="font-size: 20px;" for="addServer">Agrega una fila (SOLO SI SE NECESITA MAS DE UN TIPO DE MODULO):&nbsp;&nbsp;</span>  
-					        <button class="btn waves-effect waves-light securos-colorb" type="button" id="addModule" name="addModule">Agregar modulo
+					        <p class="grey-text text-darken-3 lighten-3">If you want to add more than one module to a product, do it by using the same <b>PRODUCT ID</b>, which will be associated to the quantity of channels you need.<br><br>
+					        <span style="font-size: 20px;" for="addServer">Add row (ONLY IF YOU NEED MORE THAN ONE MODULE TYPE):&nbsp;&nbsp;</span>  
+					        <button class="btn waves-effect waves-light securos-colorb" type="button" id="addModule" name="addModule">Add module
 							    <i class="material-icons right">plus_one</i>
 							  </button>
 					      </div>
@@ -163,10 +191,10 @@
 			<table class="striped">
 		        <thead>
 		          <tr style="font-size: 12px;" class="color-video">
-		              <th>ID de producto asociado</th>		              
-		              <th># de clientes WEB</th>
+		              <th>Product ID</th>		              
+		              <th># number of web clients</th>
 		              <th>ISS General Modules</th>
-		              <th># de canales para módulo seleccionado</th>
+		              <th># number of channels for selected module</th>
 		          </tr>
 		        </thead>
 
@@ -184,9 +212,9 @@
 				      <div class="row">
 				        <h2 class="header">Seccion 4</h2>
 				        <div class="divider"></div>
-				        <p class="grey-text text-darken-3 lighten-3">Sólo se requiere para solicitar tipos de NUEVA LICENCIA: Por favor, especifique los siguientes parámetros por cada servidor y estación de trabajo (Ingrese "N / A" si no es aplicable o deje en blanco la entrada).<br><br>
-				        <span style="font-size: 20px;" for="addServer">Agrega una fila (SOLO SI SE CUENTA CON VARIOS SERVIDORES):&nbsp;&nbsp;</span>  
-				        <button class="btn waves-effect waves-light securos-colorb" type="button" id="addServer" name="addServer">Agregar Servidor
+				        <p class="grey-text text-darken-3 lighten-3">Required only for NEW LICENSE request type: Please, specify next parameters for each server and workstation (Type "D / A" if it does not apply, or leave in blank).<br><br>
+				        <span style="font-size: 20px;" for="addServer">Add row (ONLY IF YOU HAVE MORE SERVERS):&nbsp;&nbsp;</span>  
+				        <button class="btn waves-effect waves-light securos-colorb" type="button" id="addServer" name="addServer">Add Server
 						    <i class="material-icons right">plus_one</i>
 						  </button>
 						  <!--<input type="button" onClick="go()" value="Ejecutar HRU">-->
@@ -205,14 +233,14 @@
 				</thead>
 		        <thead>
 		          <tr style="font-size: 12px;" class="color-video">
-		              <th style="background-color: #b6cdea;">Tipo de PC  (Servidor de vídeo / Operador Worstation) <a href="#modal1" class="red-text modal-trigger tooltipped" data-position="bottom" data-tooltip="MAS INFORMACIÓN">+INFO</a></th>
-		              <th style="background-color: #b6cdea;">Codigo (Guardant / Hardware/ TVISS) <a href="#modal2" class="red-text modal-trigger tooltipped" data-position="bottom" data-tooltip="MAS INFORMACIÓN">+INFO</a> </th>
-		              <th style="background-color: #b6cdea;"># de Cámaras</th>
-		              <th>Módulos analíticos ISS</th>
-		              <th># de canales para el módulo seleccionado</th>
-		              <th>OPCIÓN ADICIONAL 1: SecurOS AUTO - País / Estado</th>
-		              <th>OPCIÓN ADICIONAL 2: SecurOS FACE <a href="#modal3" class="red-text modal-trigger tooltipped" data-position="bottom" data-tooltip="MAS INFORMACIÓN">+INFO</a> - Tamaño DB rostros</th>
-		              <th style="background-color: #b6cdea;">Additional Comments<br>*SecurOS FACE  module license information:<br>(FNUseHardwareKey), Codigo () (FNHardwareKey=), (Computername) <a href="#modal3" class="red-text modal-trigger tooltipped" data-position="bottom" data-tooltip="MAS INFORMACIÓN">+INFO</a> <br>*SecurOS TRACKING KIT III  Direccón física MAC <a href="#modal4" class="red-text modal-trigger tooltipped" data-position="bottom" data-tooltip="MAS INFORMACIÓN">+INFO</a></th>
+		              <th style="background-color: #b6cdea;">Computer Type  (Video Server / Operator Worstation) <a href="#modal1" class="red-text modal-trigger tooltipped" data-position="bottom" data-tooltip="MAS INFORMACIÓN">+INFO</a></th>
+		              <th style="background-color: #b6cdea;">HRU (Guardant / Hardware/ TVISS) <a href="#modal2" class="red-text modal-trigger tooltipped" data-position="bottom" data-tooltip="MAS INFORMACIÓN">+INFO</a> </th>
+		              <th style="background-color: #b6cdea;"># cameras</th>
+		              <th>ISS Analytics</th>
+		              <th># number of channels for selectec module</th>
+		              <th>ADDITIONAL OPTION 1: SecurOS AUTO - Country / State</th>
+		              <th>ADDITIONAL OPTION 2: SecurOS FACE <a href="#modal3" class="red-text modal-trigger tooltipped" data-position="bottom" data-tooltip="MAS INFORMACIÓN">+INFO</a> - face DB size</th>
+		              <th style="background-color: #b6cdea;">Additional Comments<br>*SecurOS FACE  module license information:<br>(FNUseHardwareKey), Codigo () (FNHardwareKey=), (Computername) <a href="#modal3" class="red-text modal-trigger tooltipped" data-position="bottom" data-tooltip="MAS INFORMACIÓN">+INFO</a> <br>*SecurOS TRACKING KIT III MAC Address of the computer<a href="#modal4" class="red-text modal-trigger tooltipped" data-position="bottom" data-tooltip="MAS INFORMACIÓN">+INFO</a></th>
 		          </tr>
 		        </thead>
 
@@ -229,21 +257,21 @@
 				      <div class="row">
 				        <h2 class="header">Seccion 5</h2>
 				        <div class="divider"></div>
-				        <p class="grey-text text-darken-3 lighten-3">Sólo se requiere para solicitar tipos de UPGRADE, renovación, cambio de configuración: Por favor describa los principales cambios requeridos.<br>
-				        	<p>En el espacio a continuación, describa en detalle los cambios que son necesarios hacer a su licencia (s) EXISTENTE y el porque.</p>
+				        <p class="grey-text text-darken-3 lighten-3">Required only for UPGRADE, RENOVATION, CHANGE CONFIGURATION request type: Please describe main changes required.<br>
+				        	<p>In following field, specify detailed changes necessary for your existent license and explain why you are requesting this change.</p>
 				      
 					      <div class="row">
 					        <div class="input-field col s12">
 					          <i class="material-icons prefix">mode_edit</i>
 					          <textarea id="descripcion-secc4" class="materialize-textarea" data-length="5000"></textarea>
-					          <label for="descripcion-secc4">Descripción con lujo de detalle</label>
+					          <label for="descripcion-secc4">Detailed request descripction and explanation</label>
 					        </div>
 					  </div>
 				      </div>
 				</div>
 			</div>
 		</div>
-		<center><button class="btn waves-effect waves-light securos-colorb" id="save-configuration" name="save" type="submit">Guardar y verificar solicitud
+		<center><button class="btn waves-effect waves-light securos-colorb" id="save-configuration" name="save" type="submit">Save and verify request
 		</button>
         <div id="output"></div></center>
 	</div>
@@ -253,8 +281,8 @@
 			<footer class="page-footer securos-colorb">
 	          <div class="footer-copyright">
 	            <div class="container">
-	            © 2018 Intelligent Security Systems
-	            <a class="grey-text text-lighten-4 right" href="http://isscctv.com/">Sitio ISS</a>
+	            © 2019 Intelligent Security Systems
+	            <a class="grey-text text-lighten-4 right" href="http://isscctv.com/">ISSIVS Site</a>
 	            </div>
 	          </div>
 	        </footer>
@@ -263,39 +291,39 @@
 <!--MODALS DE INFORMACION-->
 	<div id="modal1" class="modal">
 	    <div class="modal-content">
-	      <h4>Tipo de PC  (Servidor de vídeo / Operador Worstation)</h4>
-	      <p>Sólo hay 1 servidor de configuración en un sistema. Todos los demás servidores son servidores periféricos. Si el sistema tiene sólo 1 servidor, entonces es un servidor de configuración por defecto.</p>
+	      <h4>Computer Type  (Video Server / Operator Worstation)</h4>
+	      <p>The whole system only have 1 configuration server. All the other servers are peripheral servers. If the system has only 1 server, that one server is the default configuration server.</p>
 	    </div>
 	    <div class="modal-footer">
-	      <a href="#!" class="modal-close waves-effect waves-green btn-flat red white-text">Entendido</a>
+	      <a href="#!" class="modal-close waves-effect waves-green btn-flat red white-text">Ok</a>
 	    </div>
 	</div>
 	<div id="modal2" class="modal">
 	    <div class="modal-content">
-	      <h4>Codigo (Guardant / Hardware/ TVISS)</h4>
-	      <p>Para obtener el código correcto ejecutar el hardware report utility. <br><br><b>Ejemplo de código Guardant USB:</b> 000000002A50454E<br> <b>Ejemplo de código TVISS:</b> 95692D6B356C46B4 <br><b>Ejemplo de código HW:</b> CF61F1F5AB5D131B23C138FEF0738893). <br><br>En el caso de utilizar el Guardant USB o junta TVISS, no se utiliza el código de HW.</p>
+	      <h4>HRU (Guardant / Hardware/ TVISS)</h4>
+	      <p>To obtain HRU, run program hardware report utility. <br><br><b>Guardant USB HRU example:</b> 000000002A50454E<br> <b>TVISS HRU example:</b> 95692D6B356C46B4 <br><b>HW HRU example:</b> CF61F1F5AB5D131B23C138FEF0738893). <br><br>In case you use Guardant or TVISS, you do not need HW HRU.</p>
 	    </div>
 	    <div class="modal-footer">
-	      <a href="#!" class="modal-close waves-effect waves-green btn-flat red white-text">Entendido</a>
+	      <a href="#!" class="modal-close waves-effect waves-green btn-flat red white-text">Ok</a>
 	    </div>
 	</div>
 	<div id="modal3" class="modal">
 	    <div class="modal-content">
 	      <h4>SecurOS FACE</h4>
-	      <p>El módulo SecurOS Face necesita una licencia adicional (face.key.iss). Por favor, para obtener el código correcto ejecutar el hardware report Utility.<br><br><b>Ejemplo:</b><br><br>  FNUseHardwareKey = HostId<br> FNHardwareKey = aa095d4c2e0f:9582d93<br> Computername = VIDEOSERVER</p>
+	      <p>SecurOS Face Module needs an additional license file (face.key.iss). Please, to obtain this license file, run hardware report Utility.<br><br><b>Example:</b><br><br>  FNUseHardwareKey = HostId<br> FNHardwareKey = aa095d4c2e0f:9582d93<br> Computername = VIDEOSERVER and please add physical MAC address of the server</p>
 	    </div>
 	    <div class="modal-footer">
-	      <a href="#!" class="modal-close waves-effect waves-green btn-flat red white-text">Entendido</a>
+	      <a href="#!" class="modal-close waves-effect waves-green btn-flat red white-text">Ok</a>
 	    </div>
 	</div>
 	<div id="modal4" class="modal">
 	    <div class="modal-content">
-	      <h4>SecurOS TRACKING KIT III  Direccón física MAC</h4>
-	      <p>El módulo SecurOS Tracking Kit III necesita una licencia adicional (iv_license). Por favor, agregar la dirección física MAC del server a licenciar. <br><br><b>Ejemplo:</b><br><br>Physical Address: 50-E7-E5-88-55-10													
+	      <h4>SecurOS TRACKING KIT III  MAC Physical Address</h4>
+	      <p>SecurOS Tracking Kit III Module needs an additional license file (iv_license). Please add physical MAC address of the server. <br><br><b>Example:</b><br><br>Physical Address: 50-E7-E5-88-55-10													
 </p>
 	    </div>
 	    <div class="modal-footer">
-	      <a href="#!" class="modal-close waves-effect waves-green btn-flat red white-text">Entendido</a>
+	      <a href="#!" class="modal-close waves-effect waves-green btn-flat red white-text">Ok</a>
 	    </div>
 	</div>
 
@@ -308,7 +336,7 @@
 		var nModule=0;
         $('#addServer').click(function(){
               nServers++;
-            $('#cont-addServer').append('<tr id="Server'+nServers+'"> <td> <select class="browser-default"> <option value="#" selected>---</option> <option value="Video Server - Configuracion">Video Server - Configuración</option> <option value="Video Server - Periferico">Video Server - Periferico</option> <option value="Estacion de Trabajo - Operador">Estación de Trabajo - Operador</option> </select> </td> <td><input type="text" id=""></td> <td><input type="text" id=""></td> <td> <select class="browser-default"> <option value="#" selected>---</option> <option value="SecurOS AUTO - Low Speed">SecurOS AUTO - Low Speed</option> <option value="SecurOS AUTO - High Speed">SecurOS AUTO - High Speed</option> <option value="SecurOS CARGO - Side">SecurOS CARGO - Side</option> <option value="SecurOS CARGO - Top">SecurOS CARGO - Top</option> <option value="SecurOS TRANSIT">SecurOS TRANSIT</option> <option value="SecurOS TRAFFIC">SecurOS TRAFFIC</option> <option value="SecurOS FACE">SecurOS FACE</option> <option value="SecurOS TRACKING KIT III">SecurOS TRACKING KIT III</option> <option value="SecurOS POS">SecurOS POS</option> </select> </td> <td><input type="text" id=""></td> <td><input type="text" id=""></td> <td> <select class="browser-default"> <option value="#" selected>---</option> <option value="10">Face DB: 10</option> <option value="50">Face DB: 50 </option> <option value="100">Face DB: 100</option> <option value="500">Face DB: 500</option> <option value="1,500">Face DB: 1,500</option> <option value="2,000">Face DB: 2,000</option> <option value="10,000">Face DB: 10,000</option> <option value="30,000">Face DB: 30,000</option> <option value="50,000">Face DB: 50,000</option> <option value="100,000">Face DB: 100,000</option> <option value="500,000">Face DB: 500,000</option> </select> </td> <td><input type="text" id=""></td> </tr>');
+            $('#cont-addServer').append('<tr id="Server'+nServers+'"> <td> <select class="browser-default"> <option value="#" selected>---</option> <option value="Video Server - Configuration">Video Server - Configuration</option> <option value="Video Server - Peripheral">Video Server - Peripheral</option> <option value="Workstation - Operator">Workstation - Operator</option> </select> </td> <td><input type="text" id=""></td> <td><input type="text" id=""></td> <td> <select class="browser-default"> <option value="#" selected>---</option> <option value="SecurOS AUTO - Low Speed">SecurOS AUTO - Low Speed</option> <option value="SecurOS AUTO - High Speed">SecurOS AUTO - High Speed</option> <option value="SecurOS CARGO - Side">SecurOS CARGO - Side</option> <option value="SecurOS CARGO - Top">SecurOS CARGO - Top</option> <option value="SecurOS TRANSIT">SecurOS TRANSIT</option> <option value="SecurOS TRAFFIC">SecurOS TRAFFIC</option> <option value="SecurOS FACE">SecurOS FACE</option> <option value="SecurOS TRACKING KIT III">SecurOS TRACKING KIT III</option> <option value="SecurOS POS">SecurOS POS</option> </select> </td> <td><input type="text" id=""></td> <td><input type="text" id=""></td> <td> <select class="browser-default"> <option value="#" selected>---</option> <option value="10">Face DB: 10</option> <option value="50">Face DB: 50 </option> <option value="100">Face DB: 100</option> <option value="500">Face DB: 500</option> <option value="1,500">Face DB: 1,500</option> <option value="2,000">Face DB: 2,000</option> <option value="10,000">Face DB: 10,000</option> <option value="30,000">Face DB: 30,000</option> <option value="50,000">Face DB: 50,000</option> <option value="100,000">Face DB: 100,000</option> <option value="500,000">Face DB: 500,000</option> </select> </td> <td><input type="text" id=""></td> </tr>');
         });
 		$('#addProduct').click(function(){
               nProducts++;
@@ -408,47 +436,7 @@
             processInput();
         });
         
-        var enterprises;
-        $( function() {
-            $.ajax({
-              type: "POST",
-                url: "ajax/getEnterprises.php",
-                data: "",
-                 beforeSend: function(objeto){
-                  },
-                success: function(datos){
-                    enterprises = eval(datos);
-                    $("#empresa").autocomplete({
-                        source: enterprises
-                    });
-                }
-           }); 
-        });
-        
-        /*
-        // Autocomplete "Empresa" field
-        $(function() {
-            $( "#empresa" ).autocomplete({
-              source:"./ajax/autocompleteEnterprise.php",
-              minLength: 1,
-            });
-        });
-        // Autocomplete "Mayorista" field
-        $(function() {
-            $( "#mayorista" ).autocomplete({
-              source:"./ajax/autocompleteEnterprise.php?type=3",
-              minLength: 1,
-            });
-        });
-        // Autocomplete "Usuario final" field
-        $(function() {
-            $( "#userFinal" ).autocomplete({
-              source:"./ajax/autocompleteUsuarioFinal.php",
-              minLength: 1,
-            });
-        });
-        
-        */
+       
 	</script>
 
 </body>

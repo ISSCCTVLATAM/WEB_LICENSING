@@ -28,7 +28,7 @@ if ($login->isUserLoggedIn() == true) {
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
-  <title>Control Licenciamiento | ISS MX</title>
+  <title>Licensing Control | ISSIVS</title>
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">	
   <!-- CSS  -->
@@ -67,7 +67,7 @@ if ($login->isUserLoggedIn() == true) {
 					if ($login->messages) {
 						?>
 						<div class="alert alert-success alert-dismissible" role="alert">
-						    <strong>Aviso!</strong>
+						    <strong>Alert!</strong>
 						<?php
 						foreach ($login->messages as $message) {
 							echo $message;
@@ -79,9 +79,9 @@ if ($login->isUserLoggedIn() == true) {
 				}
 				?>
                 <span id="reauth-email" class="reauth-email"></span>
-                <input class="form-control" placeholder="Usuario" name="user_name" type="text" value="" autofocus="" required>
-                <input class="form-control" placeholder="Contraseña" name="user_password" type="password" value="" autocomplete="off" required>
-                <button type="submit" class="btn btn-lg btn-block btn-signin" name="login" id="submit">Iniciar Sesión</button>
+                <input class="form-control" placeholder="User" name="user_name" type="text" value="" autofocus="" required>
+                <input class="form-control" placeholder="Password" name="user_password" type="password" value="" autocomplete="off" required>
+                <button type="submit" class="btn btn-lg btn-block btn-signin" name="login" id="submit">Log in</button>
             </form><!-- /form -->
             
         </div><!-- /card-container -->
@@ -90,7 +90,7 @@ if ($login->isUserLoggedIn() == true) {
 
 				<!-- Footer -->
 					<footer id="footer">
-						<span class="copyright">&copy; 2018 Intelligent Security Systems. Todos los derechos reservados.</span>
+						<span class="copyright">&copy; 2019 Intelligent Security Systems. All rights reserved.</span>
 					</footer>
     <script>
 			window.onload = function() { document.body.className = ''; }

@@ -91,13 +91,13 @@ class Login
                         $_SESSION['user_login_status'] = 1;
 
                     } else {
-                        $this->errors[] = "Usuario y/o contraseña no coinciden.";
+                        $this->errors[] = "User / Password do not match.";
                     }
                 } else {
-                    $this->errors[] = "Usuario y/o contraseña no coinciden.";
+                    $this->errors[] = "User / Password do not match.";
                 }
             } else {
-                $this->errors[] = "Problema de conexión de base de datos.";
+                $this->errors[] = "Database connection fault.";
             }
         }
     }
@@ -111,7 +111,7 @@ class Login
         $_SESSION = array();
         session_destroy();
         // return a little feeedback message
-        $this->messages[] = "Has sido desconectado.";
+        $this->messages[] = "You have been disconnected.";
 
     }
 
